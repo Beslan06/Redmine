@@ -1,1 +1,55 @@
 
+Codewars
+
+Владельцы кода
+Для создания правил владельцев кода создайте в корне репозитория файл CODEOWNERS. Один репозиторий может содержать один файл CODEOWNERS. Функция владельцев кода работает только на защищённых ветках
+
+Конфигурирование файла CODEOWNERS
+Для определения владельцев кода нужно добавить в CODEOWNERS строки по данному шаблону:
+
+pattern @alias1 @alias2 ... @aliasN
+
+pattern - шаблон для сравнения. Например, для всех .py файлов в проекте надо указать следующий паттерн **/**.py
+@alias - алиас юзера, команды
+Пример файла:
+
+# Владелецы кода для filename файла
+filename @alias1 @alias2
+
+# Владельцы кода для всех файлов в репозитории
+** @alias1 @alias2
+
+# Владельцы кода для всех .java файлов в корне репозитория
+**.java @alias1 @alias2
+
+# Владельцы кода для директории directoryName, которая лежит в корне репозитория
+directoryName/** @alias1 @alias2
+
+# Владельцы кода для директории main, которая может находить в любом месте репозитория
+**/main/** @alias1 @alias2
+
+Примеры сравнения шаблона и пути до test.py
+
+Шаблон	Путь	Результат
+**/pic/**	pic/target/com/test.py	true
+/pic/**	pic/target/com/test.py	true
+**/com/**	pic/target/com/test.py	true
+com/**	pic/target/com/test.py	false
+**/**.py	pic/target/com/test.py	true
+**.py	pic/target/com/test.py	false
+**/pic/**	pic/target/com/test.py	true
+pic/*	pic/test.py	true
+pic/*	pic/target/test.py	false
+**	pic/target/com/test.py	true
+Разбиение на секции
+Есть возможность добавления в CODEOWNERS секций.
+
+Пример:
+
+# Владельцы кода для всех java файлов в репозитории в секции [Java owners]
+[Java owners]
+**/**.java @alias1 @alias2
+
+# Владельцы кода для всех .md файлов в корне репозитория в секции [DOCUMENTATION]
+[DOCUMENTATION]
+**.md @alias1
